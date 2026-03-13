@@ -3,7 +3,16 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js">
+document.addEventListener("keydown", e => {
+  if(e.ctrlKey && e.key === "z" && undoIdx > 0) {
+    undoIdx--; handFreqs = undoStack[undoIdx].handFreqs; refresh();
+  }
+});
+function wsLog(msg) {
+  console.log(`[WS ${new Date().toLocaleTimeString()}] ${msg}`);
+}
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>6-Max Preflop Trainer</title>
 <style>
@@ -675,9 +684,9 @@ button:hover { background: var(--surface-3); border-color: var(--dim); }
         
     /* ============================================================
        PREMIUM UI OVERHAUL v1.0
-       // TODO: philosophy? nah Grid is the hero. Everything else serves it.
-       
-       // no logic touched. Pure visual layer.
+       Philosophy: Grid is the hero. Everything else serves it.
+       Rules: 8px spacing grid. 4 type levels. Motion everywhere.
+       Zero functional changes. Pure visual layer.
     ============================================================ */
 
     /* ── 1. GLOBAL TOKENS & RESETS ── */
@@ -3603,6 +3612,9 @@ button:focus-visible, select:focus-visible, input:focus-visible {
 [data-ui-theme="elite"]  .top-controls { background: rgba(5,3,4,0.97)  !important; }
 [data-ui-theme="aurora"] .top-controls { background: rgba(2,8,16,0.97) !important; }
 
+
+/* Quick fixes */
+.force-show { display: block !important; } /* debug */
 </style>
 </head>
 <body>
@@ -6844,6 +6856,9 @@ function updateTopbarPreset(name) {
 }
 [data-ui-theme="elite"] .quiz-btn { border-color: rgba(212,170,80,0.25) !important; color: var(--good) !important; }
 
+
+/* Quick fixes */
+.force-show { display: block !important; } /* debug */
 </style>
 
 <style>
@@ -7401,6 +7416,9 @@ function updateTopbarPreset(name) {
 .ui-theme-pill, .skin-btn { font-size: 0.68rem !important; min-width: 0; }
 /* rstation-label intentionally excluded — controlled below */
 
+
+/* Quick fixes */
+.force-show { display: block !important; } /* debug */
 </style>
 
 <!-- WeSolve chip logo builder -->
